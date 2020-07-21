@@ -713,8 +713,21 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "25f5d0ea-1f9d-491e-ae88-acf26c72fb31",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -723,15 +736,32 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
+						"value": "Bearer {{access_token}}",
+						"type": "text"
 					},
 					{
 						"key": "x-fapi-financial-id",
-						"value": "{{x-fapi-financial-id}}"
+						"value": "{{x-fapi-financial-id}}",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "ob.rbs.useinfinite.io",
+						"type": "text",
+						"disabled": true
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountBalances\": {\r\n        \"55b16334-bf2c-4443-92e3-29df8182ac18\": 28.75,\r\n        \"6a37fad9-d1a1-4ca4-9bf3-7e4bf0c36c8d\": 343.3,\r\n        \"b69afadd-a033-4fb6-87ba-1385b922d8b4\": 358.4,\r\n        \"c60a3b00-63b5-469f-89ea-5154e26483c1\": 8754.34,\r\n        \"e4fed049-a220-4cbf-b91a-ce778127ea6f\": 4534\r\n    },\r\n    \"Matrix\": {\r\n        \"Task\": \"Hours per Day\",\r\n        \"Health\": 11,\r\n        \"Investment\": 2,\r\n        \"Bank\": 2\r\n    },\r\n    \"Recomendation\": {\r\n        \"Health Products\": {\r\n            \"Covid19#100\": {\r\n                \"ProductName\": \"covid19Product\",\r\n                \"ProductId\": \"Covid19#100\",\r\n                \"ProductType\": \"Health\",\r\n                \"roi\": 3.14,\r\n                \"additionalBenifits\": \"additionalBenifits\"\r\n            },\r\n            \"CancerTreatment#100\": {\r\n                \"ProductName\": \"CancerTreatmentProductProduct\",\r\n                \"ProductId\": \"CancerTreatment#100\",\r\n                \"ProductType\": \"Health\",\r\n                \"roi\": 3.5,\r\n                \"additionalBenifits\": \"additionalBenifits\"\r\n            },\r\n            \"HeartTreatment#100\": {\r\n                \"ProductName\": \"HeartTreatmentProductProduct\",\r\n                \"ProductId\": \"HeartTreatment#100\",\r\n                \"ProductType\": \"Health\",\r\n                \"roi\": 4.5,\r\n                \"additionalBenifits\": \"additionalBenifits\"\r\n            }\r\n        },\r\n        \"Investment Products\": {\r\n            \"FDDeposit#101\": {\r\n                \"ProductName\": \"RDDepositProduct\",\r\n                \"ProductId\": \"FDDeposit#101\",\r\n                \"ProductType\": \"Investment\",\r\n                \"roi\": 7.0,\r\n                \"additionalBenifits\": \"additionalBenifits\"\r\n            },\r\n            \"RDDepositProduct#100\": {\r\n                \"ProductName\": \"RDDepositProduct\",\r\n                \"ProductId\": \"RDDepositProduct#100\",\r\n                \"ProductType\": \"Investment\",\r\n                \"roi\": 8.0,\r\n                \"additionalBenifits\": \"additionalBenifits\"\r\n            },\r\n            \"retirementPlanProduct#102\": {\r\n                \"ProductName\": \"retirementPlanProduct\",\r\n                \"ProductId\": \"retirementPlanProduct#102\",\r\n                \"ProductType\": \"Investment\",\r\n                \"roi\": 6.0,\r\n                \"additionalBenifits\": \"additionalBenifits\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/open-banking/v3.1/aisp/accounts/55b16334-bf2c-4443-92e3-29df8182ac18/recommendation-list",
+					"raw": "http://localhost:8080/open-banking/v3.1/aisp/accounts/recommendations",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -742,8 +772,7 @@
 						"v3.1",
 						"aisp",
 						"accounts",
-						"55b16334-bf2c-4443-92e3-29df8182ac18",
-						"recommendation-list"
+						"recommendations"
 					]
 				}
 			},

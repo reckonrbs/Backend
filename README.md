@@ -441,13 +441,29 @@ Use script
 
 ./generate_keystore_ob_prod.sh prod transport <SOFTWARE_ID> ../path/to/developer.natwest.com_transport.p12 <redacted> _BV7npW7Q38wzTRgMEeKYHK7Ny0 transport.jks <redacted>
 
-#### API's for recomendation based on scanning Customer Account & Trnsaction data
-1) ACCOUNT_RECOMMENDATION_LIST_ENDPOINT = "/accounts/recommendations";
 
-#### API's ACCOUNT_BALANCE_ENDPOINT = "/accounts/balance"
+#### API's ACCOUNT_BALANCE_ENDPOINT = "/accounts/balance
+- this API basically return the balance of each account present in customer
 Request : HTTP GET
 
-Response : {
+Response: "AccountBalances": {
+            "55b16334-bf2c-4443-92e3-29df8182ac18": "28.38",
+            "6a37fad9-d1a1-4ca4-9bf3-7e4bf0c36c8d": "122420.92",
+            "b69afadd-a033-4fb6-87ba-1385b922d8b4": "0.00",
+            "c60a3b00-63b5-469f-89ea-5154e26483c1": "10250.00",
+            "e4fed049-a220-4cbf-b91a-ce778127ea6f": "19799.26"
+        }
+#### API's for recomendation based on scanning Customer Account & Trnsaction data
+1) ACCOUNT_RECOMMENDATION_LIST_ENDPOINT = "/accounts/recommendations";
+	- This API analyse the transaction data and where money is spent and provides the recomendation products in different category
+	- Also show the matrix of expenditure of particular field
+	- And show all the accounts with balances which are associated with that customer. 
+	- Show a single UI where customer can see all accounts with balance information
+	
+Request : HTTP GET
+
+Response -
+{
     "Data": {
         "Recomendation": {
             "Health Products": {
@@ -528,10 +544,10 @@ Response : {
             "e4fed049-a220-4cbf-b91a-ce778127ea6f": "19799.26"
         },
         "Matrix": {
-            "Task": " Recommendation Count",
-            "Health": "5",
-            "Investment": "2",
-            "loan": "1"
+            "Task": "Product Transaction count",
+            "Health": "8",
+            "Investment": "71",
+            "Loan": "1"
         }
     },
     "Links": null,
