@@ -36,12 +36,13 @@ public class CustomerDataService {
     }
 
     public void fetchAccProductInfo(){
+        OBReadAccountList obReadAccountList;
         if(null != accountResponse){
-            OBReadAccountList obReadAccountList  = accountResponse.getData();
+             obReadAccountList  = accountResponse.getData();
         }else{
             accountResponse  = aispService.getAccountResponse();
         }
-        OBReadAccountList obReadAccountList  = accountResponse.getData();
+         obReadAccountList  = accountResponse.getData();
         List<OBReadAccountInformation> obReadAccountListAccount = obReadAccountList.getAccount();
         obReadAccountListAccount.forEach(obReadAccountInformation -> {
             OBReadDataResponse<OBReadProductList> obReadProductListOBReadDataResponse  = aispService.getProductById(obReadAccountInformation.getAccountId());
