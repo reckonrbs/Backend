@@ -4,6 +4,10 @@ import com.bankofapis.core.model.accounts.*;
 import com.bankofapis.web.service.AispService;
 import com.bankofapis.web.service.CustomerDataService;
 import com.bankofapis.web.service.calculator.CalculatorEngineDelegator;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -94,12 +98,14 @@ public class AispController {
 
     @GetMapping(value = ACCOUNT_RECOMMENDATION_LIST_ENDPOINT)
     public OBReadDataResponse<String> getAccountRecommendationListById(
-            @PathVariable(value = "accountId") String accountId) {
+            @PathVariable(value = "accountId") String accountId) throws JsonProcessingException {
 
         customerDataService.fetchAccProductInfo();
         customerDataService.fetchAccTxnInfo();
         calculatorEngineDelegator.executeFlow(customerDataService);
-        return new OBReadDataResponse().data("Hello recommendation api");
+        ObjectMapper  objectMapper  =  new ObjectMapper();
+        String json= objectMapper.writeValueAsString(calculatorEngineDelegator.getProductsToOffer());
+        return new OBReadDataResponse().data(json);
         //return aispService.getProductById(accountId);
     }
 
