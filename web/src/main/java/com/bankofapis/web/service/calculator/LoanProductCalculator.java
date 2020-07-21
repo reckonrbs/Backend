@@ -65,7 +65,7 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
                 //dummy value
                 //obReadTransaction.setTransactionInformation("Loan test");
                 if(obReadProduct!=null && aDouble>20 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
-                    String pattern ="ee038522ad254cc691";
+                    String pattern ="Salary.*";
                     String transactionInformation= obReadTransaction.getTransactionInformation();
 
                     Pattern regex= Pattern.compile(pattern);

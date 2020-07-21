@@ -39,12 +39,15 @@ public class CalculatorEngineDelegator {
             Map<String, OBReadProduct> healthRec = healthProductCalculator.execute();
             Map<String, OBReadProduct> loanRecom = loanProductCalculator.execute();
             Map<String, OBReadProduct> investmentRec = investmentProductCalculator.execute();
-            productsToOffer.put("Health Products", healthRec);
-            productsToOffer.put("Loan Products", loanRecom);
-            productsToOffer.put("Investment Products", investmentRec);
-            if (productsToOffer.size() > 1) {
-                break;
-            }
+            if(healthRec.size()>0)
+                productsToOffer.put("Health Products", healthRec);
+            if(loanRecom.size()>0)
+                productsToOffer.put("Loan Products", loanRecom);
+            if(investmentRec.size()>0)
+                productsToOffer.put("Investment Products", investmentRec);
+//            if (productsToOffer.size() > 1) {
+//                break;
+//            }
         }
     }
 
