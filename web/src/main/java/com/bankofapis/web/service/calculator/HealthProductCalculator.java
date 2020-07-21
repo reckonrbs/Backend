@@ -24,13 +24,14 @@ public class HealthProductCalculator implements ProductSelectionCalculator {
     private List<OBReadProduct> recomendHealthProds;
 
     private String accountId;
-    public static Integer healthUsageTransaction=0;
+    public Integer healthUsageTransaction;
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
     @Override
     public Map<String, OBReadProduct> execute() {
+        healthUsageTransaction=0;
       List<OBReadProduct> obReadProducts =getProductDetails(this.accountId);
       obReadProducts.forEach(obReadProduct -> {
           if(obReadProduct.getProductName().equals(ProductType.PersonalCurrentAccount.getProductName())){

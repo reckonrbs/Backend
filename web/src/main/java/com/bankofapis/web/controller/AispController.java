@@ -104,7 +104,6 @@ public class AispController {
         customerDataService.fetchAccTxnInfo();
         calculatorEngineDelegator.executeFlow(customerDataService);
         ObjectMapper  objectMapper  =  new ObjectMapper();
-        //String json= objectMapper.writeValueAsString(calculatorEngineDelegator.getProductsToOffer());
         AccountDvo accountDvo= new AccountDvo();
         accountDvo.setAccountBalances(customerDataService.fetchAcBalance());
         accountDvo.setMatrix(calculatorEngineDelegator.getMatrixMap());

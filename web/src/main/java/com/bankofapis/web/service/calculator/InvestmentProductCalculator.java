@@ -30,11 +30,12 @@ public class InvestmentProductCalculator implements ProductSelectionCalculator {
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
-    public static Integer investmentUsageTransaction=0;
+    public Integer investmentUsageTransaction;
 
     @Override
     public Map<String, OBReadProduct> execute() {
         System.out.println("this.accountId-----"+this.accountId);
+        investmentUsageTransaction=0;
         List<OBReadProduct> obReadProducts= getProductDetails(this.accountId);
 
         //select only loan products

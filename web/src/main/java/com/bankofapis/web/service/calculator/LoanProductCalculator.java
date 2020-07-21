@@ -27,9 +27,10 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
-    public static Integer loanUsageTransaction=0;
+    public Integer loanUsageTransaction;
     @Override
     public Map<String, OBReadProduct> execute() {
+        loanUsageTransaction=0;
         List<OBReadProduct> obReadProducts= getProductDetails(this.accountId);
 
         //select only loan products

@@ -25,6 +25,9 @@ public class CalculatorEngineDelegator {
 
     public void executeFlow(CustomerDataService customerDataService) {
         matrixMap.put("Task","Product Transaction count");
+        matrixMap.put("Health",String.valueOf(0));
+        matrixMap.put("Investment",String.valueOf(0));
+        matrixMap.put("Loan",String.valueOf(0));
 
         Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListMap
                 = customerDataService.getObReadAccountInformationListTransactionMap();
@@ -51,18 +54,15 @@ public class CalculatorEngineDelegator {
             if(investmentRec.size()>0) {
                 productsToOffer.put("Investment Products", investmentRec);
             }
+            matrixMap.put("Health",String.valueOf(Integer.valueOf(matrixMap.get("Health")) + healthProductCalculator.healthUsageTransaction));
+            matrixMap.put("Investment",String.valueOf(Integer.valueOf(matrixMap.get("Investment")) + investmentProductCalculator.investmentUsageTransaction));
+            matrixMap.put("Loan",String.valueOf(Integer.valueOf(matrixMap.get("Loan")) + loanProductCalculator.loanUsageTransaction));
 
 
 //            if (productsToOffer.size() > 1) {
 //                break;
 //            }
         }
-        matrixMap.put("Health",HealthProductCalculator.healthUsageTransaction.toString());
-        matrixMap.put("Investment",InvestmentProductCalculator.investmentUsageTransaction.toString());
-        matrixMap.put("Loan",LoanProductCalculator.loanUsageTransaction.toString());
-        HealthProductCalculator.healthUsageTransaction=0;
-        InvestmentProductCalculator.investmentUsageTransaction=0;
-        LoanProductCalculator.loanUsageTransaction=0;
     }
 
     public Map<String, Map<String, OBReadProduct>> getProductsToOffer() {
