@@ -6,11 +6,12 @@ import com.bankofapis.core.model.accounts.OBReadTransaction;
 import com.bankofapis.web.service.CustomerDataService;
 import com.bankofapis.web.service.recommendation.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class CalculatorEngineDelegator {
 
     @Autowired
