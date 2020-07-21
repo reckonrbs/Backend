@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -20,7 +21,7 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
     @Autowired
     CustomerDataService customerDataService;
 
-    private Map<String, OBReadProduct> savingPods;
+    private Map<String, OBReadProduct> savingPods= new HashMap();
     private List<OBReadProduct> recommentLoadPods;
     private  String accountId;
     public void setAccountId(String accountId) {
@@ -29,11 +30,12 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
 
     @Override
     public Map<String, OBReadProduct> execute() {
+        System.out.println("this.accountId-----"+this.accountId);
         List<OBReadProduct> obReadProducts= getProductDetails(this.accountId);
 
         //select only loan products
         obReadProducts.forEach(obReadProduct -> {
-            if(obReadProduct.getProductName().equals(ProductType.OTHER.getProductName())){
+            if(obReadProduct.getProductName().equals(ProductType.PersonalCurrentAccount.getProductName())){
                 savingPods.put(obReadProduct.getProductId(), obReadProduct);
             }
         });
@@ -53,16 +55,17 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             LocalDate txnDate= LocalDate.parse(dateTime,dateTimeFormatter);
             if(currentDate.isAfter(txnDate) && lastYearDate.isBefore(txnDate)){
-                obReadTransaction.setProductId("123");
-                OBReadProduct obReadProduct = savingPods.get(obReadTransaction.getProductId());
+                //obReadTransaction.setProductId("123");
+                OBReadProduct obReadProduct = obReadTransaction.getProductId() == null ? null
+                        :savingPods.get(obReadTransaction.getProductId());
                 OBReadAmount ObReadAmount= obReadTransaction.getAmount();
 
                 //If amount is greater than 40000
                 Double aDouble= new Double(ObReadAmount.getAmount());
                 //dummy value
                 obReadTransaction.setTransactionInformation("Loan test");
-                if(aDouble> 40000 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
-                    String pattern ="Loan*";
+                if(obReadProduct!=null && aDouble>20 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
+                    String pattern ="Loan.*";
                     String transactionInformation= obReadTransaction.getTransactionInformation();
 
                     Pattern regex= Pattern.compile(pattern);
@@ -78,7 +81,7 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
             final Loan loan= new Loan();
             return loan.getOBReadLoanProductMap();
         }
-        return null;
+        return new HashMap<>();
 
     }
 

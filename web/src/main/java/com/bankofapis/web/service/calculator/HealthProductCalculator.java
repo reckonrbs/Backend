@@ -69,7 +69,7 @@ public class HealthProductCalculator implements ProductSelectionCalculator {
             Health  health = new Health();
             return health.getoBReadHealthProductMap();
         }
-        return null;
+        return new HashMap<>();
     }
 
     private List<OBReadProduct> getProductDetails(String accountId){
