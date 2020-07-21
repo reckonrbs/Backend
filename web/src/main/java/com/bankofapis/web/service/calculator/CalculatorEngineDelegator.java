@@ -24,10 +24,8 @@ public class CalculatorEngineDelegator {
     private Map<String, String> matrixMap = new LinkedHashMap<>();
 
     public void executeFlow(CustomerDataService customerDataService) {
-        matrixMap.put("Task","Recommendation Count");
-        Integer healthCount=0;
-        Integer investmentCount=0;
-        Integer loanCount=0;
+        matrixMap.put("Task","Product Transaction count");
+
         Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListMap
                 = customerDataService.getObReadAccountInformationListTransactionMap();
         for (Map.Entry<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListEntry : obReadAccountInformationListMap.entrySet()) {
@@ -46,24 +44,25 @@ public class CalculatorEngineDelegator {
             Map<String, OBReadProduct> investmentRec = investmentProductCalculator.execute();
             if(healthRec.size()>0) {
                 productsToOffer.put("Health Products", healthRec);
-                ++healthCount;
             }
             if(loanRecom.size()>0) {
                 productsToOffer.put("Loan Products", loanRecom);
-                ++loanCount;
             }
             if(investmentRec.size()>0) {
                 productsToOffer.put("Investment Products", investmentRec);
-                ++investmentCount;
             }
-            matrixMap.put("Health",healthCount.toString());
-            matrixMap.put("Investment",investmentCount.toString());
-            matrixMap.put("Loan",loanCount.toString());
+
 
 //            if (productsToOffer.size() > 1) {
 //                break;
 //            }
         }
+        matrixMap.put("Health",HealthProductCalculator.healthUsageTransaction.toString());
+        matrixMap.put("Investment",InvestmentProductCalculator.investmentUsageTransaction.toString());
+        matrixMap.put("Loan",LoanProductCalculator.loanUsageTransaction.toString());
+        HealthProductCalculator.healthUsageTransaction=0;
+        InvestmentProductCalculator.investmentUsageTransaction=0;
+        LoanProductCalculator.loanUsageTransaction=0;
     }
 
     public Map<String, Map<String, OBReadProduct>> getProductsToOffer() {

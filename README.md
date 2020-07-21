@@ -447,13 +447,96 @@ Use script
 #### API's ACCOUNT_BALANCE_ENDPOINT = "/accounts/balance"
 Request : HTTP GET
 
-Response :  "AccountBalances": {
-                  "55b16334-bf2c-4443-92e3-29df8182ac18": 28.75,
-                  "6a37fad9-d1a1-4ca4-9bf3-7e4bf0c36c8d": 343.3,
-                  "b69afadd-a033-4fb6-87ba-1385b922d8b4": 358.4,
-                  "c60a3b00-63b5-469f-89ea-5154e26483c1": 8754.34,
-                  "e4fed049-a220-4cbf-b91a-ce778127ea6f": 4534
-              }
+Response : {
+    "Data": {
+        "Recomendation": {
+            "Health Products": {
+                "Covid19#100": {
+                    "ProductName": "covid19Product",
+                    "ProductId": "Covid19#100",
+                    "ProductType": "Health",
+                    "roi": 3.14,
+                    "additionalBenifits": "additionalBenifits"
+                },
+                "CancerTreatment#100": {
+                    "ProductName": "CancerTreatmentProductProduct",
+                    "ProductId": "CancerTreatment#100",
+                    "ProductType": "Health",
+                    "roi": 3.5,
+                    "additionalBenifits": "additionalBenifits"
+                },
+                "HeartTreatment#100": {
+                    "ProductName": "HeartTreatmentProductProduct",
+                    "ProductId": "HeartTreatment#100",
+                    "ProductType": "Health",
+                    "roi": 4.5,
+                    "additionalBenifits": "additionalBenifits"
+                }
+            },
+            "Loan Products": {
+                "SecondCarLoan#100": {
+                    "ProductName": "SecondCarLoanProduct",
+                    "ProductId": "SecondCarLoan#100",
+                    "ProductType": "Loan",
+                    "roi": 8.0,
+                    "additionalBenifits": "additionalBenifits"
+                },
+                "HomeLoan#101": {
+                    "ProductName": "HomeLoanProduct",
+                    "ProductId": "HomeLoan#101",
+                    "ProductType": "Loan",
+                    "roi": 9.8,
+                    "additionalBenifits": "additionalBenifits"
+                },
+                "BusinessLoan#102": {
+                    "ProductName": "BusinessLoanProduct",
+                    "ProductId": "BusinessLoan#102",
+                    "ProductType": "Loan",
+                    "roi": 10.8,
+                    "additionalBenifits": "additionalBenifits"
+                }
+            },
+            "Investment Products": {
+                "FDDeposit#101": {
+                    "ProductName": "RDDepositProduct",
+                    "ProductId": "FDDeposit#101",
+                    "ProductType": "Investment",
+                    "roi": 7.0,
+                    "additionalBenifits": "additionalBenifits"
+                },
+                "RDDepositProduct#100": {
+                    "ProductName": "RDDepositProduct",
+                    "ProductId": "RDDepositProduct#100",
+                    "ProductType": "Investment",
+                    "roi": 8.0,
+                    "additionalBenifits": "additionalBenifits"
+                },
+                "retirementPlanProduct#102": {
+                    "ProductName": "retirementPlanProduct",
+                    "ProductId": "retirementPlanProduct#102",
+                    "ProductType": "Investment",
+                    "roi": 6.0,
+                    "additionalBenifits": "additionalBenifits"
+                }
+            }
+        },
+        "AccountBalances": {
+            "55b16334-bf2c-4443-92e3-29df8182ac18": "28.38",
+            "6a37fad9-d1a1-4ca4-9bf3-7e4bf0c36c8d": "122420.92",
+            "b69afadd-a033-4fb6-87ba-1385b922d8b4": "0.00",
+            "c60a3b00-63b5-469f-89ea-5154e26483c1": "10250.00",
+            "e4fed049-a220-4cbf-b91a-ce778127ea6f": "19799.26"
+        },
+        "Matrix": {
+            "Task": " Recommendation Count",
+            "Health": "5",
+            "Investment": "2",
+            "loan": "1"
+        }
+    },
+    "Links": null,
+    "Meta": null
+}
 ```
 Once you have generated the JKS file, you can set the keystore/truststore location and password in application.yml file and set the property enableMatls to true.
 

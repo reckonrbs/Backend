@@ -27,10 +27,9 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
-
+    public static Integer loanUsageTransaction=0;
     @Override
     public Map<String, OBReadProduct> execute() {
-        System.out.println("this.accountId-----"+this.accountId);
         List<OBReadProduct> obReadProducts= getProductDetails(this.accountId);
 
         //select only loan products
@@ -50,7 +49,6 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
         //Last year
         LocalDate lastYearDate= currentDate.minusMonths(36L);
         Boolean isRecomProduct= false;
-        System.out.println("tx-----"+obReadTransactions);
         for(OBReadTransaction obReadTransaction: obReadTransactions){
             String dateTime= obReadTransaction.getBookingDateTime();
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -72,7 +70,7 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
                     Pattern regex= Pattern.compile(pattern);
                     if(regex.matcher(transactionInformation).matches()){
                         isRecomProduct= true;
-                        break;
+                        ++loanUsageTransaction;
                     }
                 }
 

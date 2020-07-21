@@ -30,6 +30,7 @@ public class InvestmentProductCalculator implements ProductSelectionCalculator {
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
+    public static Integer investmentUsageTransaction=0;
 
     @Override
     public Map<String, OBReadProduct> execute() {
@@ -74,7 +75,7 @@ public class InvestmentProductCalculator implements ProductSelectionCalculator {
                     Pattern regex= Pattern.compile(pattern);
                     if(regex.matcher(transactionInformation).matches()){
                         isRecomProduct= true;
-                        break;
+                        ++investmentUsageTransaction;
                     }
                 }
 
