@@ -10,10 +10,19 @@ public class AccountDvo {
 
     @JsonProperty("Recomendation")
     private Map<String, Map<String, OBReadProduct>> recomendation;
+
     @JsonProperty("AccountBalances")
-    private Map<String,Map<String,String>> accountBalances;
+    private Map<String,String> accountBalances;
     @JsonProperty("Matrix")
     private Map<String,String> matrix;
+
+    public Map<String, String> getAccountBalances() {
+        return accountBalances;
+    }
+
+    public void setAccountBalances(Map<String, String> accountBalances) {
+        this.accountBalances = accountBalances;
+    }
 
     public Map<String, Map<String, OBReadProduct>> getRecomendation() {
         return recomendation;
@@ -23,13 +32,6 @@ public class AccountDvo {
         this.recomendation = recomendation;
     }
 
-    public Map<String, Map<String, String>> getAccountBalances() {
-        return accountBalances;
-    }
-
-    public void setAccountBalances(Map<String, Map<String, String>> accountBalances) {
-        this.accountBalances = accountBalances;
-    }
 
     public Map<String, String> getMatrix() {
         return matrix;

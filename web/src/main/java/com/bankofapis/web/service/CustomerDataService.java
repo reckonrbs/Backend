@@ -17,7 +17,7 @@ public class CustomerDataService {
     Map<OBReadAccountInformation,List<OBReadProduct>> obReadAccountInformationListProductMap = new LinkedHashMap<>();
     Map<String,String> accAmountInfo = new LinkedHashMap();
     OBReadDataResponse<OBReadAccountList> accountResponse;
-    Map<String,Map<String,String>> accBalanceInfo = new LinkedHashMap<>();
+    //Map<String,String> accBalanceInfo = new LinkedHashMap<>();
 
     public Map<OBReadAccountInformation, List<OBReadProduct>> getObReadAccountInformationListProductMap() {
         return obReadAccountInformationListProductMap;
@@ -69,7 +69,7 @@ public class CustomerDataService {
         OBReadBalanceList obReadBalanceList= obReadBalanceListOBReadDataResponse.getData();
         return obReadBalanceList.getAccount();
     }
-    public Map<String,Map<String,String>> fetchAcBalance(){
+    public Map<String,String> fetchAcBalance(){
         accountResponse = aispService.getAccountResponse();
         OBReadAccountList obReadAccountList  = accountResponse.getData();
         List<OBReadAccountInformation> obReadAccountListAccount = obReadAccountList.getAccount();
@@ -80,7 +80,7 @@ public class CustomerDataService {
                 accAmountInfo.put(obReadAccountInformation.getAccountId(),obReadBalance.getAmount().getAmount());
             });
         });
-        accBalanceInfo.put("AccountBalances",accAmountInfo);
-        return accBalanceInfo;
+
+        return accAmountInfo;
     }
 }

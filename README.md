@@ -440,7 +440,12 @@ Use script
 
 
 ./generate_keystore_ob_prod.sh prod transport <SOFTWARE_ID> ../path/to/developer.natwest.com_transport.p12 <redacted> _BV7npW7Q38wzTRgMEeKYHK7Ny0 transport.jks <redacted>
+
+#### API's for recomendation based on scanning Customer Account & Trnsaction data
+1) ACCOUNT_RECOMMENDATION_LIST_ENDPOINT = "/accounts/recommendations";
 ```
 Once you have generated the JKS file, you can set the keystore/truststore location and password in application.yml file and set the property enableMatls to true.
 
 >**Note: For further documentation and request bodies please visit Bank of APIs [Payments](https://www.bankofapis.com/products/payments/) and [Accounts](https://www.bankofapis.com/products/accounts/)**
+
+ 
