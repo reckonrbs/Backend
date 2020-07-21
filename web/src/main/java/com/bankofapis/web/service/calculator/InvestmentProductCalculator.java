@@ -4,6 +4,7 @@ import com.bankofapis.core.model.accounts.OBReadAmount;
 import com.bankofapis.core.model.accounts.OBReadProduct;
 import com.bankofapis.core.model.accounts.OBReadTransaction;
 import com.bankofapis.web.service.CustomerDataService;
+import com.bankofapis.web.service.recommendation.Investment;
 import com.bankofapis.web.service.recommendation.Loan;
 import com.bankofapis.web.service.recommendation.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +58,10 @@ public class InvestmentProductCalculator implements ProductSelectionCalculator {
                 OBReadProduct obReadProduct = savingPods.get(obReadTransaction.getProductId());
                 OBReadAmount ObReadAmount= obReadTransaction.getAmount();
 
-                //If amount is greater than 40000
+                //If amount is greater than 50000
                 Double aDouble= new Double(ObReadAmount.getAmount());
-                if(aDouble> 40000 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
-                    String pattern ="Loan*";
+                if(aDouble> 50000 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
+                    String pattern ="Investment*";
                     String transactionInformation= obReadTransaction.getTransactionInformation();
 
                     Pattern regex= Pattern.compile(pattern);
@@ -73,8 +74,8 @@ public class InvestmentProductCalculator implements ProductSelectionCalculator {
             }
         }
         if(isRecomProduct){
-            final Loan loan= new Loan();
-            return loan.getOBReadLoanProductMap();
+            final Investment investment= new Investment();
+            return investment.getoBReadInvestmentProductMap();
         }
         return null;
 
