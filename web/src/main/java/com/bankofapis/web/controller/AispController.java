@@ -1,6 +1,7 @@
 package com.bankofapis.web.controller;
 
 import com.bankofapis.core.model.accounts.*;
+import com.bankofapis.web.dvo.AccountDvo;
 import com.bankofapis.web.service.AispService;
 import com.bankofapis.web.service.CustomerDataService;
 import com.bankofapis.web.service.calculator.CalculatorEngineDelegator;
@@ -97,15 +98,18 @@ public class AispController {
     }
 
     @GetMapping(value = ACCOUNT_RECOMMENDATION_LIST_ENDPOINT)
-    public OBReadDataResponse<String> getAccountRecommendationListById(
+    public OBReadDataResponse<AccountDvo> getAccountRecommendationListById(
             @PathVariable(value = "accountId") String accountId) throws JsonProcessingException {
 
         customerDataService.fetchAccProductInfo();
         customerDataService.fetchAccTxnInfo();
         calculatorEngineDelegator.executeFlow(customerDataService);
         ObjectMapper  objectMapper  =  new ObjectMapper();
-        String json= objectMapper.writeValueAsString(calculatorEngineDelegator.getProductsToOffer());
-        return new OBReadDataResponse().data(json);
+        //String json= objectMapper.writeValueAsString(calculatorEngineDelegator.getProductsToOffer());
+        AccountDvo accountDvo= new AccountDvo();
+        accountDvo.setRecomendation(calculatorEngineDelegator.getProductsToOffer());
+        accountDvo.setAccountBalances(customerDataService.fetchAcBalance());
+        return new OBReadDataResponse().data(accountDvo);
         //return aispService.getProductById(accountId);
     }
 

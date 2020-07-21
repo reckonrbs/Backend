@@ -34,6 +34,15 @@ public class OBReadTransaction {
     @JsonProperty("ProductId")
     private String productId;
 
+    @Override
+    public String toString() {
+        return "OBReadTransaction{" +
+                "creditDebitIndicator='" + creditDebitIndicator + '\'' +
+                ", amount=" + amount +
+                ", transactionInformation='" + transactionInformation + '\'' +
+                '}';
+    }
+
     public String getProductId() {
         return "PPI2468";
     }

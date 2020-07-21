@@ -48,8 +48,9 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
         //current date
         LocalDate currentDate = LocalDate.now();
         //Last year
-        LocalDate lastYearDate= currentDate.minusMonths(12L);
+        LocalDate lastYearDate= currentDate.minusMonths(36L);
         Boolean isRecomProduct= false;
+        System.out.println("tx-----"+obReadTransactions);
         for(OBReadTransaction obReadTransaction: obReadTransactions){
             String dateTime= obReadTransaction.getBookingDateTime();
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -64,7 +65,7 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
                 Double aDouble= new Double(ObReadAmount.getAmount());
                 //dummy value
                 //obReadTransaction.setTransactionInformation("Loan test");
-                if(obReadProduct!=null && aDouble>20 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
+                if(obReadProduct!=null && aDouble>2000 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
                     String pattern ="Salary.*";
                     String transactionInformation= obReadTransaction.getTransactionInformation();
 
