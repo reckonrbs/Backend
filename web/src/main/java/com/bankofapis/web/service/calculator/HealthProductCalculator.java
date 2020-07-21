@@ -41,11 +41,12 @@ public class HealthProductCalculator implements ProductSelectionCalculator {
         boolean isRecomdProduct = false;
         for(OBReadTransaction obReadTransaction :obReadTransactions){
             String dateTime = obReadTransaction.getBookingDateTime();
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             LocalDate txnDate = LocalDate.parse(dateTime,dateTimeFormatter);
 
             if(currentDate.isAfter(txnDate) && lastYearDate.isBefore(txnDate)){
-                OBReadProduct obReadProduct = savingProds.get(obReadTransaction.getProductId());
+                OBReadProduct obReadProduct = obReadTransaction.getProductId() == null ? null
+                        :savingProds.get(obReadTransaction.getProductId());
                 OBReadAmount obReadAmount = obReadTransaction.getAmount();
                 Double aDouble = new Double(obReadAmount.getAmount());
                 if(aDouble>10000 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){

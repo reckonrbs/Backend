@@ -35,7 +35,7 @@ public class OBReadTransaction {
     private String productId;
 
     public String getProductId() {
-        return productId;
+        return "Covid19#100";
     }
 
     public void setProductId(String productId) {

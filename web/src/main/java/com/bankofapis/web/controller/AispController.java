@@ -96,7 +96,7 @@ public class AispController {
     public OBReadDataResponse<String> getAccountRecommendationListById(
             @PathVariable(value = "accountId") String accountId) {
 
-        customerDataService.fetchAccTxnInfo();
+        customerDataService.fetchAccProductInfo();
         customerDataService.fetchAccTxnInfo();
         calculatorEngineDelegator.executeFlow();
         return new OBReadDataResponse().data("Hello recommendation api");
