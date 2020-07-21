@@ -106,8 +106,9 @@ public class AispController {
         ObjectMapper  objectMapper  =  new ObjectMapper();
         //String json= objectMapper.writeValueAsString(calculatorEngineDelegator.getProductsToOffer());
         AccountDvo accountDvo= new AccountDvo();
-        accountDvo.setRecomendation(calculatorEngineDelegator.getProductsToOffer());
         accountDvo.setAccountBalances(customerDataService.fetchAcBalance());
+        accountDvo.setMatrix(calculatorEngineDelegator.getMatrixMap());
+        accountDvo.setRecomendation(calculatorEngineDelegator.getProductsToOffer());
         return new OBReadDataResponse().data(accountDvo);
         //return aispService.getProductById(accountId);
     }

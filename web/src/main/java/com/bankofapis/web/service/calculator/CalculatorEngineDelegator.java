@@ -21,8 +21,13 @@ public class CalculatorEngineDelegator {
     private ProductSelectionCalculatorFactory productSelectionCalculatorFactory;
     Map<String, Map<String, OBReadProduct>> productsToOffer = new LinkedHashMap<>();
     private Map<String, List<Map<String, OBReadProduct>>> finalMap = new LinkedHashMap<>();
+    private Map<String, String> matrixMap = new LinkedHashMap<>();
 
     public void executeFlow(CustomerDataService customerDataService) {
+        matrixMap.put("Task","Recommendation Count");
+        Integer healthCount=0;
+        Integer investmentCount=0;
+        Integer loanCount=0;
         Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListMap
                 = customerDataService.getObReadAccountInformationListTransactionMap();
         for (Map.Entry<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListEntry : obReadAccountInformationListMap.entrySet()) {
@@ -39,12 +44,22 @@ public class CalculatorEngineDelegator {
             Map<String, OBReadProduct> healthRec = healthProductCalculator.execute();
             Map<String, OBReadProduct> loanRecom = loanProductCalculator.execute();
             Map<String, OBReadProduct> investmentRec = investmentProductCalculator.execute();
-            if(healthRec.size()>0)
+            if(healthRec.size()>0) {
                 productsToOffer.put("Health Products", healthRec);
-            if(loanRecom.size()>0)
+                ++healthCount;
+            }
+            if(loanRecom.size()>0) {
                 productsToOffer.put("Loan Products", loanRecom);
-            if(investmentRec.size()>0)
+                ++loanCount;
+            }
+            if(investmentRec.size()>0) {
                 productsToOffer.put("Investment Products", investmentRec);
+                ++investmentCount;
+            }
+            matrixMap.put("Health",healthCount.toString());
+            matrixMap.put("Investment",investmentCount.toString());
+            matrixMap.put("Loan",loanCount.toString());
+
 //            if (productsToOffer.size() > 1) {
 //                break;
 //            }
@@ -53,5 +68,9 @@ public class CalculatorEngineDelegator {
 
     public Map<String, Map<String, OBReadProduct>> getProductsToOffer() {
         return productsToOffer;
+    }
+
+    public Map<String,String> getMatrixMap() {
+        return matrixMap;
     }
 }
