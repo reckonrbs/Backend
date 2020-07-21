@@ -39,7 +39,8 @@ public class HealthProductCalculator implements ProductSelectionCalculator {
       });
              List<OBReadTransaction> obReadTransactions=  getTxnDetails(this.accountId);
         LocalDate currentDate = LocalDate.now();
-        LocalDate lastYearDate = currentDate.minusMonths(12L);
+        //ek for last 2 yrs
+        LocalDate lastYearDate = currentDate.minusMonths(24L);
         boolean isRecomdProduct = false;
         for(OBReadTransaction obReadTransaction :obReadTransactions){
             String dateTime = obReadTransaction.getBookingDateTime();
