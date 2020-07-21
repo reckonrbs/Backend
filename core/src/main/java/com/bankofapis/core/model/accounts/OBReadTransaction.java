@@ -31,6 +31,18 @@ public class OBReadTransaction {
     @JsonProperty("Balance")
     private OBReadBalance balance;
 
+    @JsonProperty("ProductId")
+    private String productId;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+
     public String getAccountId() {
         return accountId;
     }

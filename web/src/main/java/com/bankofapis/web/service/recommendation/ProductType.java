@@ -4,7 +4,10 @@ public enum ProductType {
 
     LOAN("Loan"),
     HEALTH("Health"),
-    INVESTMENT("Investment");
+    INVESTMENT("Investment"),
+    SAVING_BANK("Saving Bank"),
+    CURRENT_BANK("Current BANK"),
+    CREDIT_CARD("Credit Card");
 
     private String name;
 
