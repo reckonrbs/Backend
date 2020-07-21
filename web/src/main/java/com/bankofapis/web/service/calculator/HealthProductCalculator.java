@@ -52,10 +52,10 @@ public class HealthProductCalculator implements ProductSelectionCalculator {
                         :savingProds.get(obReadTransaction.getProductId());
                 OBReadAmount obReadAmount = obReadTransaction.getAmount();
                 //dummy value
-                obReadTransaction.setTransactionInformation("Health test");
+               // obReadTransaction.setTransactionInformation("Health test");
                 Double aDouble = new Double(obReadAmount.getAmount());
-                if(obReadProduct!=null && aDouble>20 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
-                    String pattern = "Health.*";
+                if(obReadProduct!=null && aDouble>200 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
+                    String pattern = "Monthly.*";
                      String transactionInformation = obReadTransaction.getTransactionInformation();
                     Pattern regex = Pattern.compile(pattern);
                     if(regex.matcher(transactionInformation).matches()){

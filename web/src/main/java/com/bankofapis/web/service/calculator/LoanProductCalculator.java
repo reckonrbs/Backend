@@ -63,9 +63,9 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
                 //If amount is greater than 40000
                 Double aDouble= new Double(ObReadAmount.getAmount());
                 //dummy value
-                obReadTransaction.setTransactionInformation("Loan test");
+                //obReadTransaction.setTransactionInformation("Loan test");
                 if(obReadProduct!=null && aDouble>20 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
-                    String pattern ="Loan.*";
+                    String pattern ="ee038522ad254cc691";
                     String transactionInformation= obReadTransaction.getTransactionInformation();
 
                     Pattern regex= Pattern.compile(pattern);

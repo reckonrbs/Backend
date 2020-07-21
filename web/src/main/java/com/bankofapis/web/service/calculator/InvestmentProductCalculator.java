@@ -66,9 +66,9 @@ public class InvestmentProductCalculator implements ProductSelectionCalculator {
                 //If amount is greater than 50000
                 Double aDouble= new Double(ObReadAmount.getAmount());
                 //dummy value
-                obReadTransaction.setTransactionInformation("Investment test");
+              //  obReadTransaction.setTransactionInformation("Investment test");
                 if(obReadProduct!=null && aDouble>20 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
-                    String pattern ="Investment.*";
+                    String pattern ="Tools.*";
                     String transactionInformation= obReadTransaction.getTransactionInformation();
 
                     Pattern regex= Pattern.compile(pattern);

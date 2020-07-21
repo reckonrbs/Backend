@@ -19,30 +19,36 @@ public class CalculatorEngineDelegator {
     private CustomerDataService customerDataService;
     @Autowired
     private ProductSelectionCalculatorFactory productSelectionCalculatorFactory;
-    Map<String , List<OBReadProduct>> productsToOffer = new LinkedHashMap<>();
-   private Map<String,  List<Map<String,OBReadProduct>>> finalMap = new LinkedHashMap<>();
-    public void executeFlow(CustomerDataService customerDataService){
+    Map<String, Map<String, OBReadProduct>> productsToOffer = new LinkedHashMap<>();
+    private Map<String, List<Map<String, OBReadProduct>>> finalMap = new LinkedHashMap<>();
+
+    public void executeFlow(CustomerDataService customerDataService) {
         Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListMap
-                =customerDataService.getObReadAccountInformationListTransactionMap();
-        obReadAccountInformationListMap.forEach((obReadAccountInformation, obReadTransactions) -> {
-            List<Map<String,OBReadProduct>> obReadProductList=new ArrayList<>();
+                = customerDataService.getObReadAccountInformationListTransactionMap();
+        for (Map.Entry<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListEntry : obReadAccountInformationListMap.entrySet()) {
+            OBReadAccountInformation obReadAccountInformation = obReadAccountInformationListEntry.getKey();
+            List<OBReadTransaction> obReadTransactions = obReadAccountInformationListEntry.getValue();
             HealthProductCalculator healthProductCalculator = (HealthProductCalculator) productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.HEALTH.getProductName());
-//            LoanProductCalculator loanProductCalculator =(LoanProductCalculator)productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.LOAN.getProductName());
-//            InvestmentProductCalculator investmentProductCalculator= (InvestmentProductCalculator) productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.INVESTMENT.getProductName());
+            LoanProductCalculator loanProductCalculator = (LoanProductCalculator) productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.LOAN.getProductName());
+            InvestmentProductCalculator investmentProductCalculator = (InvestmentProductCalculator) productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.INVESTMENT.getProductName());
             healthProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
-//            loanProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
-//            investmentProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
+            loanProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
+            investmentProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
             //execute only for saving bank product further can be checked for current bank & credit card
-            obReadProductList.add(healthProductCalculator.execute());
-            //obReadProductList.add(loanProductCalculator.execute());
-            //obReadProductList.add(investmentProductCalculator.execute());
-            if(obReadProductList.size()>0){
-                finalMap.put(obReadAccountInformation.getAccountId(), obReadProductList );
+            //size > 1 add
+            Map<String, OBReadProduct> healthRec = healthProductCalculator.execute();
+            Map<String, OBReadProduct> loanRecom = loanProductCalculator.execute();
+            Map<String, OBReadProduct> investmentRec = investmentProductCalculator.execute();
+            productsToOffer.put("Health Products", healthRec);
+            productsToOffer.put("Loan Products", loanRecom);
+            productsToOffer.put("Investment Products", investmentRec);
+            if (productsToOffer.size() > 1) {
+                break;
             }
-        });
+        }
     }
 
-    public Map getProductsToOffer() {
-        return finalMap;
+    public Map<String, Map<String, OBReadProduct>> getProductsToOffer() {
+        return productsToOffer;
     }
 }
