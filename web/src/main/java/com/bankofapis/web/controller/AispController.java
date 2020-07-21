@@ -2,6 +2,8 @@ package com.bankofapis.web.controller;
 
 import com.bankofapis.core.model.accounts.*;
 import com.bankofapis.web.service.AispService;
+import com.bankofapis.web.service.CustomerDataService;
+import com.bankofapis.web.service.calculator.CalculatorEngineDelegator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,11 @@ public class AispController {
     public AispController(AispService aispService) {
         this.aispService = aispService;
     }
+
+    @Autowired
+    private CustomerDataService customerDataService;
+    @Autowired
+    private CalculatorEngineDelegator calculatorEngineDelegator;
 
     @GetMapping(value = OB_JOURNEY_INIT)
     public String initialize(HttpServletResponse response) {
@@ -88,6 +95,10 @@ public class AispController {
     @GetMapping(value = ACCOUNT_RECOMMENDATION_LIST_ENDPOINT)
     public OBReadDataResponse<String> getAccountRecommendationListById(
             @PathVariable(value = "accountId") String accountId) {
+
+        customerDataService.fetchAccTxnInfo();
+        customerDataService.fetchAccTxnInfo();
+        calculatorEngineDelegator.executeFlow();
         return new OBReadDataResponse().data("Hello recommendation api");
         //return aispService.getProductById(accountId);
     }
