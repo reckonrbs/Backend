@@ -21,4 +21,6 @@ public class Endpoints {
 
 
     public static final String ACCOUNT_RECOMMENDATION_LIST_ENDPOINT = "/accounts/{accountId}/recommendations";
+    public static final String ACCOUNT_RECOMMENDATION_ENDPOINT = "/accounts/recommendation";
+
 }
