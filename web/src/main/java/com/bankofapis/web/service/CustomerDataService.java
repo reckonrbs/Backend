@@ -13,8 +13,8 @@ import java.util.Map;
 public class CustomerDataService {
     @Autowired
     private AispService aispService;
-    Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListTransactionMap = new LinkedHashMap<>();
-    Map<OBReadAccountInformation,List<OBReadProduct>> obReadAccountInformationListProductMap = new LinkedHashMap<>();
+    Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListTransactionMap;
+    Map<OBReadAccountInformation,List<OBReadProduct>> obReadAccountInformationListProductMap;
     Map<String,String> accAmountInfo = new LinkedHashMap();
     OBReadDataResponse<OBReadAccountList> accountResponse;
     //Map<String,String> accBalanceInfo = new LinkedHashMap<>();
@@ -31,6 +31,7 @@ public class CustomerDataService {
         accountResponse = aispService.getAccountResponse();
         OBReadAccountList obReadAccountList  = accountResponse.getData();
         List<OBReadAccountInformation> obReadAccountListAccount = obReadAccountList.getAccount();
+        obReadAccountInformationListTransactionMap = new LinkedHashMap<>();
         obReadAccountListAccount.forEach(obReadAccountInformation -> {
             OBReadDataResponse<OBReadTransactionList> obReadTransactionListOBReadDataResponse  = aispService.getTransactionsById(obReadAccountInformation.getAccountId());
             OBReadTransactionList obReadTransactionList= obReadTransactionListOBReadDataResponse.getData();
@@ -47,6 +48,7 @@ public class CustomerDataService {
         }
          obReadAccountList  = accountResponse.getData();
         List<OBReadAccountInformation> obReadAccountListAccount = obReadAccountList.getAccount();
+        obReadAccountInformationListProductMap = new LinkedHashMap<>();
         obReadAccountListAccount.forEach(obReadAccountInformation -> {
             OBReadDataResponse<OBReadProductList> obReadProductListOBReadDataResponse  = aispService.getProductById(obReadAccountInformation.getAccountId());
             OBReadProductList obReadProductList = obReadProductListOBReadDataResponse.getData();
