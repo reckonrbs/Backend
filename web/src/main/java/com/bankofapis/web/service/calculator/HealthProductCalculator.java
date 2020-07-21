@@ -31,7 +31,7 @@ public class HealthProductCalculator implements ProductSelectionCalculator {
     public Map<String, OBReadProduct> execute() {
       List<OBReadProduct> obReadProducts =getProductDetails(this.accountId);
       obReadProducts.forEach(obReadProduct -> {
-          if(obReadProduct.getProductName().equals(ProductType.SAVING_BANK.getProductName())){
+          if(obReadProduct.getProductName().equals(ProductType.OTHER.getProductName())){
               savingProds.put(obReadProduct.getProductId(),obReadProduct);
           }
       });
@@ -45,11 +45,14 @@ public class HealthProductCalculator implements ProductSelectionCalculator {
             LocalDate txnDate = LocalDate.parse(dateTime,dateTimeFormatter);
 
             if(currentDate.isAfter(txnDate) && lastYearDate.isBefore(txnDate)){
+                obReadTransaction.setProductId("123");
                 OBReadProduct obReadProduct = obReadTransaction.getProductId() == null ? null
                         :savingProds.get(obReadTransaction.getProductId());
                 OBReadAmount obReadAmount = obReadTransaction.getAmount();
+                //dummy value
+                obReadTransaction.setTransactionInformation("Health test");
                 Double aDouble = new Double(obReadAmount.getAmount());
-                if(aDouble>10000 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
+                if(aDouble>150 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
                     String pattern = "Health*";
                      String transactionInformation = obReadTransaction.getTransactionInformation();
                     Pattern regex = Pattern.compile(pattern);

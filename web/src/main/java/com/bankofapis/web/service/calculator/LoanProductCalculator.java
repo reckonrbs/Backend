@@ -33,7 +33,7 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
 
         //select only loan products
         obReadProducts.forEach(obReadProduct -> {
-            if(obReadProduct.getProductName().equals(ProductType.SAVING_BANK.getProductName())){
+            if(obReadProduct.getProductName().equals(ProductType.OTHER.getProductName())){
                 savingPods.put(obReadProduct.getProductId(), obReadProduct);
             }
         });
@@ -53,11 +53,14 @@ public class LoanProductCalculator implements ProductSelectionCalculator {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             LocalDate txnDate= LocalDate.parse(dateTime,dateTimeFormatter);
             if(currentDate.isAfter(txnDate) && lastYearDate.isBefore(txnDate)){
+                obReadTransaction.setProductId("123");
                 OBReadProduct obReadProduct = savingPods.get(obReadTransaction.getProductId());
                 OBReadAmount ObReadAmount= obReadTransaction.getAmount();
 
                 //If amount is greater than 40000
                 Double aDouble= new Double(ObReadAmount.getAmount());
+                //dummy value
+                obReadTransaction.setTransactionInformation("Loan test");
                 if(aDouble> 40000 && obReadProduct.getProductId().equals(obReadTransaction.getProductId())){
                     String pattern ="Loan*";
                     String transactionInformation= obReadTransaction.getTransactionInformation();

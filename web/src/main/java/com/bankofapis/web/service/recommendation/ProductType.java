@@ -8,7 +8,7 @@ public enum ProductType {
     SAVING_BANK("Saving Bank"),
     CURRENT_BANK("Current BANK"),
     CREDIT_CARD("Credit Card"),
-    OTHER("other");
+    OTHER("Other");
 
     private String name;
 
