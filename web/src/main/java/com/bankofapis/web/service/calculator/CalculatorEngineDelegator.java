@@ -23,6 +23,18 @@ public class CalculatorEngineDelegator {
     public void executeFlow(CustomerDataService customerDataService){
         Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListMap
                 =customerDataService.getObReadAccountInformationListTransactionMap();
+        obReadAccountInformationListMap.forEach((obReadAccountInformation, obReadTransactions) -> {
+            HealthProductCalculator healthProductCalculator = (HealthProductCalculator) productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.HEALTH.getProductName());
+            LoanProductCalculator loanProductCalculator =(LoanProductCalculator)productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.LOAN.getProductName());
+            InvestmentProductCalculator investmentProductCalculator= (InvestmentProductCalculator) productSelectionCalculatorFactory.getProductSelectionCalculator(ProductType.INVESTMENT.getProductName());
+            healthProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
+            loanProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
+            investmentProductCalculator.setAccountId(obReadAccountInformation.getAccountId());
+            //execute only for saving bank product further can be checked for current bank & credit card
+            productsToOffer.putAll(healthProductCalculator.execute());
+            //productsToOffer.putAll(loanProductCalculator.execute());
+            //productsToOffer.putAll(investmentProductCalculator.execute());
+        });
     }
 
     public Map<String, OBReadProduct> getProductsToOffer() {
