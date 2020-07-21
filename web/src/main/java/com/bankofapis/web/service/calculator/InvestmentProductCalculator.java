@@ -8,6 +8,7 @@ import com.bankofapis.web.service.recommendation.Investment;
 import com.bankofapis.web.service.recommendation.Loan;
 import com.bankofapis.web.service.recommendation.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.swing.text.DateFormatter;
 import java.text.DateFormat;
@@ -16,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
+@Service
 public class InvestmentProductCalculator implements ProductSelectionCalculator {
 
     @Autowired

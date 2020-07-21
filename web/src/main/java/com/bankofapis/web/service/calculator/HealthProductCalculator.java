@@ -7,13 +7,14 @@ import com.bankofapis.web.service.CustomerDataService;
 import com.bankofapis.web.service.recommendation.Health;
 import com.bankofapis.web.service.recommendation.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
+@Service
 public class HealthProductCalculator implements ProductSelectionCalculator {
     @Autowired
     private CustomerDataService customerDataService;
