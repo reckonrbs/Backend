@@ -98,7 +98,7 @@ public class AispController {
 
         customerDataService.fetchAccProductInfo();
         customerDataService.fetchAccTxnInfo();
-        calculatorEngineDelegator.executeFlow();
+        calculatorEngineDelegator.executeFlow(customerDataService);
         return new OBReadDataResponse().data("Hello recommendation api");
         //return aispService.getProductById(accountId);
     }

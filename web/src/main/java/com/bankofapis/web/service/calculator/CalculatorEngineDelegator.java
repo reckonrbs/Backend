@@ -20,7 +20,7 @@ public class CalculatorEngineDelegator {
     private ProductSelectionCalculatorFactory productSelectionCalculatorFactory;
     Map<String , OBReadProduct> productsToOffer = new LinkedHashMap<>();
 
-    public void executeFlow(){
+    public void executeFlow(CustomerDataService customerDataService){
         Map<OBReadAccountInformation, List<OBReadTransaction>> obReadAccountInformationListMap
                 =customerDataService.getObReadAccountInformationListTransactionMap();
         obReadAccountInformationListMap.forEach((obReadAccountInformation, obReadTransactions) -> {
