@@ -52,7 +52,7 @@ public class InvestmentProductCalculator implements ProductSelectionCalculator {
         Boolean isRecomProduct= false;
         for(OBReadTransaction obReadTransaction: obReadTransactions){
             String dateTime= obReadTransaction.getBookingDateTime();
-            DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("d/MM/yyyy");
+            DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate txnDate= LocalDate.parse(dateTime,dateTimeFormatter);
             if(currentDate.isAfter(txnDate) && lastYearDate.isBefore(txnDate)){
                 OBReadProduct obReadProduct = savingPods.get(obReadTransaction.getProductId());
