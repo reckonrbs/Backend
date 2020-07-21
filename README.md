@@ -443,6 +443,17 @@ Use script
 
 #### API's for recomendation based on scanning Customer Account & Trnsaction data
 1) ACCOUNT_RECOMMENDATION_LIST_ENDPOINT = "/accounts/recommendations";
+
+#### API's ACCOUNT_BALANCE_ENDPOINT = "/accounts/balance"
+Request : HTTP GET
+
+Response :  "AccountBalances": {
+                  "55b16334-bf2c-4443-92e3-29df8182ac18": 28.75,
+                  "6a37fad9-d1a1-4ca4-9bf3-7e4bf0c36c8d": 343.3,
+                  "b69afadd-a033-4fb6-87ba-1385b922d8b4": 358.4,
+                  "c60a3b00-63b5-469f-89ea-5154e26483c1": 8754.34,
+                  "e4fed049-a220-4cbf-b91a-ce778127ea6f": 4534
+              }
 ```
 Once you have generated the JKS file, you can set the keystore/truststore location and password in application.yml file and set the property enableMatls to true.
 
