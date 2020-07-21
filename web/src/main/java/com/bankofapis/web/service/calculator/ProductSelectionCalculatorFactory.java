@@ -18,7 +18,7 @@ public class ProductSelectionCalculatorFactory {
             return healthProductCalculator;
         }else if(ProductType.LOAN.getProductName().equals(productType)){
             return loanProductCalculator;
-        }else if(ProductType.LOAN.getProductName().equals(productType)){
+        }else if(ProductType.INVESTMENT.getProductName().equals(productType)){
             return   investmentProductCalculator;
         }
         return  null;
