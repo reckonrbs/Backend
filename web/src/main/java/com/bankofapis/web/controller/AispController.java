@@ -98,8 +98,7 @@ public class AispController {
     }
 
     @GetMapping(value = ACCOUNT_RECOMMENDATION_LIST_ENDPOINT)
-    public OBReadDataResponse<AccountDvo> getAccountRecommendationListById(
-            @PathVariable(value = "accountId") String accountId) throws JsonProcessingException {
+    public OBReadDataResponse<AccountDvo> getAccountRecommendationListById() throws JsonProcessingException {
 
         customerDataService.fetchAccProductInfo();
         customerDataService.fetchAccTxnInfo();

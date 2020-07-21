@@ -20,7 +20,7 @@ public class Endpoints {
     public static final String DOMESTIC_PAYMENTS_PAYMENT_ID_ENDPOINT = "/domestic-payments/{paymentId}";
 
 
-    public static final String ACCOUNT_RECOMMENDATION_LIST_ENDPOINT = "/accounts/{accountId}/recommendations";
+    public static final String ACCOUNT_RECOMMENDATION_LIST_ENDPOINT = "/accounts/recommendations";
     public static final String ACCOUNT_RECOMMENDATION_ENDPOINT = "/accounts/recommendation";
     public static final String ACCOUNT_BALANCE_ENDPOINT = "/accounts/balance";
 
